@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -16,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.weathercompose.data.WeatherModel
 import com.example.weathercompose.ui.theme.Blueligth
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -69,18 +71,38 @@ fun TabLayout() {
             count = tabList.size,
             state = pagerState,
             modifier = Modifier.weight(1.0f)
-        ) {
-                index->
+        ) { index ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
-            ){
-                items(15){
-                    ListItemui()
+            ) {
+                itemsIndexed(
+                    listOf(
+                        WeatherModel(
+                            "Misk",
+                            "10:00",
+                            "25 C",
+                            "sunny",
+                            "//cdn.weatherapi.com/weather/64x64/night/113.png",
+                            "",
+                            "",
+                            ""
+                        ),
+                        WeatherModel(
+                                "Misk",
+                        "02/05/2023",
+                        "",
+                        "sunny",
+                        "//cdn.weatherapi.com/weather/64x64/night/113.png",
+                        "26",
+                        "12",
+                        ""
+                    )
+
+                    )
+                ) {
+                    _index, item-> ListItemui(item)
                 }
             }
-
         }
-
     }
-
 }

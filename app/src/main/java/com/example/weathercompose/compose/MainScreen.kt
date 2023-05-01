@@ -65,7 +65,7 @@ fun MainCard() {
                     )
                 }
                 Text(
-                    text = "London",
+                    text = "Minsk",
                     style = TextStyle(fontSize = 24.sp),
                     color = Color.White
                 )
@@ -95,25 +95,25 @@ fun MainCard() {
                         )
                     }
 
-                }
-                Text(
-                    text = "23c/12c",
-                    style = TextStyle(fontSize = 16.sp),
-                    color = Color.White
-                )
 
-                IconButton(
-                    onClick = {
-
-                    })
-                {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_sync),
-                        contentDescription = "img4",
-                        tint = Color.White
+                    Text(
+                        text = "23c/12c",
+                        style = TextStyle(fontSize = 16.sp),
+                        color = Color.White
                     )
-                }
 
+                    IconButton(
+                        onClick = {
+
+                        })
+                    {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_sync),
+                            contentDescription = "img4",
+                            tint = Color.White
+                        )
+                    }
+                 }
             }
         }
 
