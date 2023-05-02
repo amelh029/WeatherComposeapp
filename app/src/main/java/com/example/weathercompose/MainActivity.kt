@@ -26,7 +26,19 @@ class MainActivity : ComponentActivity() {
                 val daysList = remember{
                     mutableStateOf(listOf<WeatherModel>())
                 }
-                getData("Brest", this, daysList)
+                val currentDay =remember{
+                    mutableStateOf(WeatherModel(
+                        "",
+                        "",
+                        "10.0",
+                        "",
+                        "",
+                        "10.0",
+                        "10.0",
+                        ""
+                    ))
+                }
+                getData("Brest", this, daysList, currentDay)
                 Image(
                     painter = painterResource(
                         id = R.drawable.weather_bg
@@ -39,8 +51,8 @@ class MainActivity : ComponentActivity() {
                 )
                 // A surface container using the 'background' color from the theme
                 Column() {
-                    MainCard()
-                    TabLayout(daysList)
+                    MainCard(currentDay)
+                    TabLayout(daysList,currentDay)
                 }
             }
         }

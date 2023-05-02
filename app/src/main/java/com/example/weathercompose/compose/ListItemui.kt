@@ -1,10 +1,12 @@
 package com.example.weathercompose.compose
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,11 +19,15 @@ import com.example.weathercompose.data.WeatherModel
 import com.example.weathercompose.ui.theme.Blueligth
 
 @Composable
-fun ListItemui(item: WeatherModel) {
+fun ListItemui(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 3.dp),
+            .padding(top = 3.dp)
+            .clickable {
+                if(item.hours.isEmpty()) return@clickable
+                    currentDay.value = item
+            },
         backgroundColor = Blueligth,
         elevation = 0.dp,
         shape = RoundedCornerShape(5.dp)
@@ -48,7 +54,9 @@ fun ListItemui(item: WeatherModel) {
                 )
             }
             Text(
-                text = item.currentTemp.ifEmpty { "${item.maxTemp}/${item.minTemp}" },
+                text = item.currentTemp.ifEmpty {
+                    "${item.maxTemp.toFloat().toInt()} C" +
+                            "/${item.minTemp.toFloat().toInt()} C" },
                 color = Color.White,
                 style = TextStyle(fontSize = 25.sp)
 

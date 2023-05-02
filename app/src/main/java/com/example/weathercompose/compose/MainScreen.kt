@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.weathercompose.R
+import com.example.weathercompose.data.WeatherModel
 import com.example.weathercompose.ui.theme.Blueligth
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -27,9 +29,9 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 
-@Preview(showBackground = true)
+
 @Composable
-fun MainCard() {
+fun MainCard(currentDay: MutableState<WeatherModel>) {
 
     Column(
         modifier = Modifier
@@ -51,12 +53,12 @@ fun MainCard() {
                 ) {
                     Text(
                         modifier = Modifier.padding(top = 8.dp),
-                        text = "1 May 2023 13:00",
+                        text = currentDay.value.time,
                         style = TextStyle(fontSize = 15.sp),
                         color = Color.White
                     )
                     AsyncImage(
-                        model = "https://cdn.weatherapi.com/weather/64x64/day/176.png",
+                        model = "https:"+ currentDay.value.condidionIcon,
                         contentDescription = "img2",
                         modifier = Modifier
                             .size(35.dp)
@@ -65,17 +67,21 @@ fun MainCard() {
                     )
                 }
                 Text(
-                    text = "Brest",
+                    text = currentDay.value.city,
                     style = TextStyle(fontSize = 24.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "23 c",
+                    text = if(currentDay.value.currentTemp.isNotEmpty())
+                        currentDay.value.currentTemp.toFloat().toInt().toString() + "C"
+                    else "${currentDay.value.maxTemp.toFloat().toInt()}C/" +
+                            "${currentDay.value.minTemp.toFloat().toInt()}C"
+                    ,
                     style = TextStyle(fontSize = 65.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "Synny",
+                    text = currentDay.value.conditiontext,
                     style = TextStyle(fontSize = 16.sp),
                     color = Color.White
                 )
@@ -97,7 +103,8 @@ fun MainCard() {
 
 
                     Text(
-                        text = "23c/12c",
+                        text = "${currentDay.value.maxTemp.toFloat().toInt()}C/" +
+                                "${currentDay.value.minTemp.toFloat().toInt()}C",
                         style = TextStyle(fontSize = 16.sp),
                         color = Color.White
                     )

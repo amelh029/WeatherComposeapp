@@ -8,7 +8,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
 
-fun getData(city: String, context: Context, daysList: MutableState<List<WeatherModel>>) {
+fun getData(city: String, context: Context, daysList: MutableState<List<WeatherModel>>,
+                currentDay: MutableState<WeatherModel>) {
 
     val url="https://api.weatherapi.com/v1/forecast.json"+
             "?key=$API_KEY&"+
@@ -23,8 +24,9 @@ fun getData(city: String, context: Context, daysList: MutableState<List<WeatherM
         {
             response ->
             val list = getWeatherByDays(response)
+            currentDay.value = list[0]
             daysList.value = list
-            Log.d("Mylog", "Response: $response")
+
         },
         {
             Log.d("MyLog","VolleyError: $it")
