@@ -65,7 +65,7 @@ fun MainCard() {
                     )
                 }
                 Text(
-                    text = "Minsk",
+                    text = "Brest",
                     style = TextStyle(fontSize = 24.sp),
                     color = Color.White
                 )

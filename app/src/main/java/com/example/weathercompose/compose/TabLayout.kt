@@ -11,11 +11,11 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.weathercompose.data.WeatherModel
 import com.example.weathercompose.ui.theme.Blueligth
@@ -26,9 +26,8 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
-@Preview(showBackground = true)
 @Composable
-fun TabLayout() {
+fun TabLayout(daysList: MutableState<List<WeatherModel>>) {
     val tabList = listOf("HOURS", "DAYS")
     val pagerState = rememberPagerState()
     val tabIndex = pagerState.currentPage
@@ -76,29 +75,7 @@ fun TabLayout() {
                 modifier = Modifier.fillMaxSize()
             ) {
                 itemsIndexed(
-                    listOf(
-                        WeatherModel(
-                            "Misk",
-                            "10:00",
-                            "25 C",
-                            "sunny",
-                            "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                            "",
-                            "",
-                            ""
-                        ),
-                        WeatherModel(
-                                "Misk",
-                        "02/05/2023",
-                        "",
-                        "sunny",
-                        "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                        "26",
-                        "12",
-                        ""
-                    )
-
-                    )
+                    daysList.value
                 ) {
                     _index, item-> ListItemui(item)
                 }
