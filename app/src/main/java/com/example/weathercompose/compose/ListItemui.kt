@@ -25,8 +25,9 @@ fun ListItemui(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
             .fillMaxWidth()
             .padding(top = 3.dp)
             .clickable {
-                if(item.hours.isEmpty()) return@clickable
-                    currentDay.value = item
+                if (item.hours.isEmpty())
+                    return@clickable
+                currentDay.value = item
             },
         backgroundColor = Blueligth,
         elevation = 0.dp,
@@ -56,25 +57,39 @@ fun ListItemui(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
             Text(
                 text = item.currentTemp.ifEmpty {
                     "${item.maxTemp.toFloat().toInt()} C" +
-                            "/${item.minTemp.toFloat().toInt()} C" },
+                            "/${item.minTemp.toFloat().toInt()} C"
+                },
                 color = Color.White,
                 style = TextStyle(fontSize = 25.sp)
 
             )
-            AsyncImage(
-                model = "https:${item.condidionIcon}",
-                contentDescription = "img4",
-                modifier = Modifier
-                    .size(35.dp)
-                    .padding(
-                        end = 8.dp
-                    )
-                    .size(35.dp)
+            Column(
+                modifier = Modifier.padding(
+                    start = 8.dp,
+                    top = 5.dp,
+                    bottom = 5.dp
+                )
+            ) {
+                Text(
+                    text = item.winddir.ifEmpty {
+                        "${item.maxwind}/${item.winddir}"
+                    },
+                    color = Color.White,
+                    style = TextStyle(fontSize = 10.sp)
 
-            )
+                )
+                AsyncImage(
+                    model = "https:${item.condidionIcon}",
+                    contentDescription = "img4",
+                    modifier = Modifier
+                        .size(35.dp)
+                        .padding(
+                            end = 8.dp
+                        )
+                        .size(35.dp)
+
+                )
+            }
         }
-
     }
-
-
 }

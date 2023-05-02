@@ -31,7 +31,9 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun MainCard(currentDay: MutableState<WeatherModel>) {
+fun MainCard(currentDay: MutableState<WeatherModel>,
+             onClickSync: ()-> Unit,
+             onClickSearh:()-> Unit) {
 
     Column(
         modifier = Modifier
@@ -91,7 +93,7 @@ fun MainCard(currentDay: MutableState<WeatherModel>) {
                 ) {
                     IconButton(
                         onClick = {
-
+                            onClickSearh.invoke()
                         })
                     {
                         Icon(
@@ -103,15 +105,17 @@ fun MainCard(currentDay: MutableState<WeatherModel>) {
 
 
                     Text(
-                        text = "${currentDay.value.maxTemp.toFloat().toInt()}C/" +
-                                "${currentDay.value.minTemp.toFloat().toInt()}C",
+                        text = "${currentDay.value.maxwind} km/h ${currentDay.value.winddir}",
+
+
+
                         style = TextStyle(fontSize = 16.sp),
                         color = Color.White
                     )
 
                     IconButton(
                         onClick = {
-
+                            onClickSync.invoke()
                         })
                     {
                         Icon(

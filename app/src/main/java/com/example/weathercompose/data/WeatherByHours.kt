@@ -22,7 +22,9 @@ fun getWeatherByHours(hours:String ): List<WeatherModel> {
                 item.getJSONObject("condition").getString("icon"),
                 "10.0",
                 "10.0",
-                ""
+                "",
+                item.getString("wind_kph").toFloat().toInt().toString()+ "km/h",
+                item.getString("wind_dir")
             )
         )
     }

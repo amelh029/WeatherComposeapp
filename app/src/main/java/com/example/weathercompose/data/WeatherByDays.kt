@@ -24,7 +24,11 @@ fun getWeatherByDays(response: String): List<WeatherModel> {
                     .getString("maxtemp_c"),
                 item.getJSONObject("day")
                     .getString("mintemp_c"),
-                item.getJSONArray("hour").toString()
+                item.getJSONArray("hour").toString(),
+                item.getJSONObject("day")
+                    .getString("maxwind_kph"),
+                ""
+
             )
         )
     }

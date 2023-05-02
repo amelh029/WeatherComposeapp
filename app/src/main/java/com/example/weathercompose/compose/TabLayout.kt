@@ -77,7 +77,7 @@ fun TabLayout(daysList: MutableState<List<WeatherModel>>, currentDay: MutableSta
                 1-> daysList.value
                 else -> daysList.value
             }
-            MainList(list = list, currentDays = currentDay)
+            MainList(list, currentDay)
 
         }
     }
