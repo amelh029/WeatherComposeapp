@@ -12,6 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.weathercompose.compose.MainCard
 import com.example.weathercompose.compose.TabLayout
+import com.example.weathercompose.data.getData
 import com.example.weathercompose.ui.theme.WeatherComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WeatherComposeTheme {
+                getData("Brest", this)
                 Image(
                     painter = painterResource(
                         id = R.drawable.weather_bg
